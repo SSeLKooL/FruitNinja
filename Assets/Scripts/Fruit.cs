@@ -20,7 +20,6 @@ public class Fruit : MonoBehaviour
     private float _currentSizeIncrease;
 
     private const int FramesPerSecond = 60;
-    
     private void Start()
     {
         _fruit = this.gameObject;
