@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float maxSpeedY;
     [SerializeField] private float minSpeedY;
     [SerializeField] private float angleIncreaseQuotient;
+    
     [SerializeField] private GameObject spawnerLeft;
     [SerializeField] private GameObject spawnerRight;
     
@@ -16,6 +17,7 @@ public class Spawner : MonoBehaviour
     private float _rightX;
     private float _y;
     private float _currentSpeedX;
+
     
     private void Start()
     {

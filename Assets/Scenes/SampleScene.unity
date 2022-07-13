@@ -461,6 +461,7 @@ MonoBehaviour:
   minSpeedX: -0.2
   maxSpeedY: 0.6
   minSpeedY: 0.5
+
   maxAngleIncreaseValue: 0
   minAngleIncreaseValue: 0
   spawnerLeft: {fileID: 1317853319}
