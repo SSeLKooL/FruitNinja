@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Fruit : MonoBehaviour
 {
@@ -7,6 +9,8 @@ public class Fruit : MonoBehaviour
     [SerializeField] private float lifeTime;
     [SerializeField] private float maxSizeIncrease;
     [SerializeField] private float minSizeIncrease;
+    [SerializeField] private float spriteSize;
+    private float _range;
 
     public Quaternion angleIncreaseValue = Quaternion.identity;
     public Vector3 direction = new Vector3(0, 0, 0);
@@ -14,21 +18,34 @@ public class Fruit : MonoBehaviour
     private GameObject _fruit;
     private Quaternion _angleCurrentValue = Quaternion.identity;
     private float _currentSizeIncrease;
-    
+
     private const int FramesPerSecond = 60;
     
     private void Start()
     {
         _fruit = this.gameObject;
         gravitation /= FramesPerSecond;
-        //angleIncreaseValue.eulerAngles /= FramesPerSecond;
         _currentSizeIncrease = Random.Range(minSizeIncrease, maxSizeIncrease) / FramesPerSecond;
+        
         StartCoroutine(Execution(lifeTime));
     }
 
-    private void CheckCollider()
+
+    private void CheckCollider(Vector2 currentPosition)
     {
-        
+        _range = _fruit.transform.localScale.x * spriteSize;
+
+        if (Math.Pow(_fruit.transform.position.x - currentPosition.x, 2) +
+            Math.Pow(_fruit.transform.position.y - currentPosition.y, 2) <=
+            Math.Pow(_range, 2))
+        {
+            ForcedExecution();
+        }
+    }
+
+    private void ForcedExecution()
+    {
+        Destroy(_fruit);
     }
 
     private IEnumerator Execution(float timeToWait)
@@ -39,7 +56,6 @@ public class Fruit : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         
-        Debug.Log("Executed");
         Destroy(_fruit);
     }
     
@@ -55,8 +71,22 @@ public class Fruit : MonoBehaviour
         _fruit.transform.localScale += Vector3.one * _currentSizeIncrease;
     }
 
+    private void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            var touch = Input.touches[0];
+
+            if (touch.phase == TouchPhase.Moved)
+            {
+                CheckCollider(Camera.main.ScreenToWorldPoint(touch.position));
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
         Move();
     }
+    
 }
