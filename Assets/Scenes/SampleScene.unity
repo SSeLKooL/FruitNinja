@@ -214,6 +214,7 @@ MonoBehaviour:
   minSpeedX: -0.4
   maxSpeedY: 0.6
   minSpeedY: 0.5
+  angleIncreaseQuotient: 20
   spawnerLeft: {fileID: 1617513452}
   spawnerRight: {fileID: 535458090}
 --- !u!212 &238040379
@@ -459,6 +460,7 @@ MonoBehaviour:
   minSpeedX: -0.2
   maxSpeedY: 0.6
   minSpeedY: 0.5
+  angleIncreaseQuotient: 20
   spawnerLeft: {fileID: 1317853319}
   spawnerRight: {fileID: 115663590}
 --- !u!212 &502210875
@@ -721,7 +723,7 @@ MonoBehaviour:
   spawner3: {fileID: 238040378}
   packCount: 1
   throwObjectDelayTime: 2
-  throwPackDelayTime: 5
+  throwPackDelayTime: 4
   timeDecreaseQuotient: 0.9
 --- !u!1 &1317853319
 GameObject:
@@ -924,6 +926,7 @@ MonoBehaviour:
   minSpeedX: 0.1
   maxSpeedY: 0.6
   minSpeedY: 0.5
+  angleIncreaseQuotient: 20
   spawnerLeft: {fileID: 580249441}
   spawnerRight: {fileID: 341706648}
 --- !u!212 &1754483935
