@@ -214,6 +214,8 @@ MonoBehaviour:
   minSpeedX: -0.4
   maxSpeedY: 0.6
   minSpeedY: 0.5
+  maxAngleIncreaseValue: 30
+  minAngleIncreaseValue: -30
   spawnerLeft: {fileID: 1617513452}
   spawnerRight: {fileID: 535458090}
 --- !u!212 &238040379
@@ -459,6 +461,8 @@ MonoBehaviour:
   minSpeedX: -0.2
   maxSpeedY: 0.6
   minSpeedY: 0.5
+  maxAngleIncreaseValue: 0
+  minAngleIncreaseValue: 0
   spawnerLeft: {fileID: 1317853319}
   spawnerRight: {fileID: 115663590}
 --- !u!212 &502210875
@@ -924,6 +928,8 @@ MonoBehaviour:
   minSpeedX: 0.1
   maxSpeedY: 0.6
   minSpeedY: 0.5
+  maxAngleIncreaseValue: -10
+  minAngleIncreaseValue: -30
   spawnerLeft: {fileID: 580249441}
   spawnerRight: {fileID: 341706648}
 --- !u!212 &1754483935

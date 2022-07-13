@@ -96,5 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitation: 1
-  lifeTime: 3
+  lifeTime: 1.5
+  maxSizeIncrease: 0.15
+  minSizeIncrease: -0.15
+  angleIncreaseValue: {x: 0, y: 0, z: 0, w: 1}
   direction: {x: 0, y: 0, z: 0}
