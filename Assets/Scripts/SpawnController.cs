@@ -1,73 +1,95 @@
-using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnController : MonoBehaviour
 {
-    [SerializeField] private Spawner spawner1;
-    [SerializeField] private Spawner spawner2;
-    [SerializeField] private Spawner spawner3;
-    private int _spawnerCount = 3;
+    private const int SpawnersCount = 3;
+    [SerializeField] private Spawner[] spawners = new Spawner[SpawnersCount];
     
     [SerializeField] private int packCount;
     [SerializeField] private float throwObjectDelayTime;
     [SerializeField] private float throwPackDelayTime;
     [SerializeField] private float timeDecreaseQuotient;
 
-    private bool _isThrowing;
+    private int _objectsToThrowCount; 
+    
+    private readonly Timer _throwPackTimer = new Timer();
+    private readonly Timer _throwObjectTimer = new Timer();
 
-    private IEnumerator ThrowNewPack(int currentCount)
+    private bool _stopSpawn;
+
+    public void Stop()
     {
-        var timeToWait = throwObjectDelayTime;
-        
-        while (timeToWait > 0)
+        _stopSpawn = true;
+    }
+
+    private class Timer
+    {
+        private float _currentTime;
+        private float _timeToWait;
+        private bool _timerIsSet;
+
+        public void UpdateTimer()
         {
-            timeToWait -= 0.01f;
-            yield return new WaitForSeconds(0.01f);
-        }
-        
-        switch (Random.Range(1, _spawnerCount))
-        {
-            case 1:
-                spawner1.SpawnObject();
-                break;
-            case 2:
-                spawner2.SpawnObject();
-                break;
-            case 3:
-                spawner3.SpawnObject();
-                break;
+            if (_timerIsSet)
+            {
+                _currentTime += Time.deltaTime;
+            }
         }
 
-        if (--currentCount != 0)
+        public void SetTimer(float timeToWait)
         {
-            StartCoroutine(ThrowNewPack(--currentCount));
+            _timeToWait = timeToWait;
+            _currentTime = 0;
+            _timerIsSet = true;
         }
-        else
+        
+        public bool CheckTimer()
         {
-            packCount++;
-            throwPackDelayTime *= timeDecreaseQuotient;
-            throwObjectDelayTime *= timeDecreaseQuotient;
-            _isThrowing = false;
+            if (_timerIsSet)
+            {
+                return _timeToWait < _currentTime;
+            }
+
+            return true;
         }
     }
 
-    private IEnumerator Reload(float timeToWait)
+    private void Start()
     {
-        while (timeToWait > 0)
-        {
-            timeToWait -= 0.01f;
-            yield return new WaitForSeconds(0.01f);
-        }
+        _throwPackTimer.SetTimer(throwPackDelayTime);
+    }
 
-        StartCoroutine(ThrowNewPack(packCount));
+    private void Spawn()
+    {
+        _throwPackTimer.UpdateTimer();
+        _throwObjectTimer.UpdateTimer();
+        
+        if (_throwPackTimer.CheckTimer() && _throwObjectTimer.CheckTimer())
+        {
+            _throwObjectTimer.SetTimer(throwObjectDelayTime);
+            
+            _objectsToThrowCount--;
+
+            spawners[Random.Range(0, SpawnersCount)].SpawnObject();
+
+            if (_objectsToThrowCount == 0)
+            {
+                _throwPackTimer.SetTimer(throwPackDelayTime);
+
+                packCount++;
+                throwPackDelayTime *= timeDecreaseQuotient;
+                throwObjectDelayTime *= timeDecreaseQuotient;
+                _objectsToThrowCount = packCount;
+            }
+        }
     }
 
     private void Update()
     {
-        if (!_isThrowing)
+        if (!_stopSpawn)
         {
-            _isThrowing = true;
-            StartCoroutine(Reload(throwPackDelayTime));
+            Spawn();
         }
     }
 }
