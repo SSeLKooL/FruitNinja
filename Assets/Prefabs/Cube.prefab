@@ -95,10 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a654c86e77133b846b53a84a8aaaeb02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  gravitation: 1
-  lifeTime: 3
-=======
   gravitation: 20
   maxSizeIncrease: 0.15
   minSizeIncrease: -0.05
@@ -107,5 +103,4 @@ MonoBehaviour:
   currentCamera: {fileID: 0}
   playerConfiguration: {fileID: 0}
   angleIncreaseValue: {x: 0, y: 0, z: 0, w: 1}
->>>>>>> Stashed changes
   direction: {x: 0, y: 0, z: 0}

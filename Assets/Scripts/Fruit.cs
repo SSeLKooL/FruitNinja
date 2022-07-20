@@ -1,29 +1,10 @@
-<<<<<<< Updated upstream
-using System.Collections;
-=======
 using System;
->>>>>>> Stashed changes
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Fruit : MonoBehaviour
 {
-    private GameObject _fruit;
     [SerializeField] private float gravitation;
-<<<<<<< Updated upstream
-    [SerializeField] private float lifeTime;
-    public Vector3 direction = new Vector3(0, 0, 0);
-    private const int FramesPerSecond = 60;
-    private void Start()
-    {
-        _fruit = this.gameObject;
-        gravitation /= FramesPerSecond;
-        StartCoroutine(Execution(lifeTime));
-    }
-
-    private void CheckCollider()
-    {
-        
-=======
     [SerializeField] private float maxSizeIncrease;
     [SerializeField] private float minSizeIncrease;
     [SerializeField] private float spriteSize;
@@ -45,7 +26,7 @@ public class Fruit : MonoBehaviour
     private void Start()
     {
         _fruit = this.gameObject;
-        _startPositionY = _fruit.transform.position.y;
+        _startPositionY = _fruit.transform.position.y; 
         _currentSizeIncrease.z = Random.Range(minSizeIncrease, maxSizeIncrease);
     }
 
@@ -73,7 +54,6 @@ public class Fruit : MonoBehaviour
     {
         playerConfiguration.AddScorePoints(scoreForExecution);
         Destroy(_fruit);
->>>>>>> Stashed changes
     }
 
     private void Execution()
@@ -85,12 +65,6 @@ public class Fruit : MonoBehaviour
 
     private void Move()
     {
-<<<<<<< Updated upstream
-        _fruit.transform.position += direction;
-
-        direction.y -= gravitation;
-    }
-=======
         _fruit.transform.position += direction * Time.deltaTime;
         direction.y -= gravitation * Time.deltaTime;
         
@@ -113,7 +87,6 @@ public class Fruit : MonoBehaviour
         }
         
         CheckPosition();
->>>>>>> Stashed changes
 
         Move();
     }
