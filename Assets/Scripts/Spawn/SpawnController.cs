@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class SpawnController : MonoBehaviour
 {
     private const int SpawnersCount = 3;
+
     [SerializeField] private Spawner[] spawners = new Spawner[SpawnersCount];
     
     [SerializeField] private int packCount;
@@ -58,6 +60,7 @@ public class SpawnController : MonoBehaviour
     private void Start()
     {
         _throwPackTimer.SetTimer(throwPackDelayTime);
+        _objectsToThrowCount = packCount;
     }
 
     private void Spawn()

@@ -172,11 +172,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1853e794b3bcaf428aca9b81bd3b065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fruitPrefab: {fileID: 5155764562566414867, guid: 8dd62e7375c1fdb48bd9c35c929c160f, type: 3}
+  fruitPrefab: {fileID: 2333015940855386101, guid: 8dd62e7375c1fdb48bd9c35c929c160f, type: 3}
+  blobPrefab: {fileID: 8321082201876498690, guid: b69ed3dfe6f457b498d6736f6911a63a, type: 3}
+  scoreForExecution: 100
   maxSpeedX: 0.2
   minSpeedX: -0.2
   maxSpeedY: 0.6
   minSpeedY: 0.5
-  angleIncreaseQuotient: 20
   spawnerLeft: {fileID: 2737642015325272374}
   spawnerRight: {fileID: 2737642016535839575}
+  fruitParentTransform: {fileID: 0}
+  spriteCutter: {fileID: 0}
+  playerConfiguration: {fileID: 0}
+  currentCamera: {fileID: 0}
+  blobs:
+  - {fileID: 21300000, guid: d1c62f98188ae6e43a80e5251150d9a3, type: 3}
+  - {fileID: 21300000, guid: bca4d0ad5da331047b81313c11290bcf, type: 3}
+  - {fileID: 21300000, guid: d1c62f98188ae6e43a80e5251150d9a3, type: 3}
+  - {fileID: 21300000, guid: 29807c57b6626ab4499d03b5bcf6c46a, type: 3}
+  - {fileID: 21300000, guid: f39a6e45aeb21db4e8db7e933594997e, type: 3}
+  - {fileID: 21300000, guid: f39a6e45aeb21db4e8db7e933594997e, type: 3}
+  - {fileID: 21300000, guid: f39a6e45aeb21db4e8db7e933594997e, type: 3}
+  - {fileID: 21300000, guid: 29807c57b6626ab4499d03b5bcf6c46a, type: 3}
