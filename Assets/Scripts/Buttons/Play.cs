@@ -14,7 +14,6 @@ public class Play : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("ok");
         loadScreen.SetActive(true);
         _showScreenScript.Show("GameScene");
     }
