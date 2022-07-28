@@ -184,11 +184,13 @@ public class SpriteCutter : MonoBehaviour
     {
         var e = Force / math.sqrt(A * A + B * B);
         
-        var side = (A > 0)? 1: -1;
-        
-        _leftSideDirection = new Vector2(side * A * e, - side * B * e);
-        _rightSideDirection = new Vector2(- side * A * e, side * B * e);
+        var Aside = (A > 0)? 1: -1;
+        var Bside = (B > 0)? 1: -1;
+        var side = Aside * Bside;
 
+        _leftSideDirection = new Vector2(-side * B * e, side * A * e);
+        _rightSideDirection = new Vector2(side * B * e, -side * A * e);
+        
         _rightSideDirection += objectToCutDirection;
         _leftSideDirection += objectToCutDirection;
     }

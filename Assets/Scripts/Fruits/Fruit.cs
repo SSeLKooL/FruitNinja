@@ -42,14 +42,14 @@ public class Fruit : MonoBehaviour
             Math.Pow(_fruit.transform.position.y - currentPosition.y, 2) <= Math.Pow(_range, 2);
     }
 
-    private void Update()
+    private void CheckTouch()
     {
         if (!_startedSlice)
         {
             if (Input.touchCount > 0)
             {
                 var touch = Input.touches[0];
-
+                Debug.Log("touch");
                 if (touch.phase == TouchPhase.Moved)
                 {
                     _firstTapPosition = currentCamera.ScreenToWorldPoint(touch.position);
@@ -58,6 +58,15 @@ public class Fruit : MonoBehaviour
                     {
                         _startedSlice = true;
                     }
+                }
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                _firstTapPosition = currentCamera.ScreenToWorldPoint(Input.mousePosition);
+                
+                if (CheckCollider(_firstTapPosition))
+                {
+                    _startedSlice = true;
                 }
             }
         }
@@ -74,10 +83,24 @@ public class Fruit : MonoBehaviour
                     spawner.ExecuteFruit(_fruit, fruits[_spriteIndex], _spriteIndex, _firstTapPosition, _secondTapPosition);
                 }
             }
+            else if (Input.GetMouseButton(0))
+            {
+                _secondTapPosition = currentCamera.ScreenToWorldPoint(Input.mousePosition);
+                
+                if (Vector2.Distance(_secondTapPosition, _firstTapPosition) > sliceRange)
+                {
+                    spawner.ExecuteFruit(_fruit, fruits[_spriteIndex], _spriteIndex, _firstTapPosition, _secondTapPosition);
+                }
+            }
             else
             {
                 _startedSlice = false;
             }
         }
+    }
+
+    private void Update()
+    {
+        CheckTouch();
     }
 }
