@@ -62,7 +62,7 @@ public class Spawner : MonoBehaviour
         _fruitScript = fruit.GetComponent<Fruit>();
             
         _physicsScript.direction = new Vector3(_currentSpeedX, Random.Range(minSpeedY, maxSpeedY), 0);
-        _physicsScript.playerConfiguration = playerConfiguration;
+        _physicsScript.playerConfiguration = _fruitScript.PlayerConfiguration = playerConfiguration;
         _fruitScript.currentCamera = currentCamera;
         _fruitScript.spawner = _thisSpawner;
     }

@@ -16,19 +16,42 @@ public class PlayerConfiguration : MonoBehaviour
     [SerializeField] private GameObject scoreObject;
     private TextMeshProUGUI _bestScoreText;
     private TextMeshProUGUI _scoreText;
+    [SerializeField] private TextMeshProUGUI resultScoreText;
+    [SerializeField] private TextMeshProUGUI resultBestScoreText;
     
     [SerializeField] private SpawnController spawnController;
 
-    private string _best = "лучший: ";
+    [SerializeField] private GameOverScreen gameOverScreen;
+
+    private const string Best = "лучший: ";
 
     private bool _stop;
 
     private float _bestScore;
 
+    public bool CheckGameStatus()
+    {
+        return _stop;
+    }
+
     private void GameOver()
     {
         _stop = true;
         spawnController.Stop();
+        if (_newScore > _bestScore)
+        {
+            PlayerPrefs.SetInt("RecordScore", _newScore);
+            PlayerPrefs.Save();
+            resultScoreText.text = _newScore.ToString();
+            resultBestScoreText.text = Best + _newScore;
+        }
+        else
+        {
+            resultScoreText.text = _newScore.ToString();
+            resultBestScoreText.text = Best + _bestScore;
+        }
+
+        gameOverScreen.ShowGameOverScreen();
     }
 
     private void Start()
@@ -49,7 +72,7 @@ public class PlayerConfiguration : MonoBehaviour
             _bestScore = 0;
         }
 
-        _bestScoreText.text = _best + _bestScore;
+        _bestScoreText.text = Best + _bestScore;
     }
 
     public void AddScorePoints(int points)
@@ -86,12 +109,10 @@ public class PlayerConfiguration : MonoBehaviour
         if (_newScore > _bestScore)
         {
             _bestScore = math.lerp(_bestScore, _newScore, scoreAddQuotient);
-            PlayerPrefs.SetInt("RecordScore", _newScore);
-            PlayerPrefs.Save();
         }
         
         _scoreText.text = Mathf.RoundToInt(_currentScore).ToString();
-        _bestScoreText.text = _best + Mathf.RoundToInt(_bestScore);
+        _bestScoreText.text = Best + Mathf.RoundToInt(_bestScore);
         
     }
 

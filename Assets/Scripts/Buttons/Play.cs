@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Play : MonoBehaviour, IPointerDownHandler
+public class Play : MonoBehaviour, IPointerUpHandler
 {
     [SerializeField] private GameObject loadScreen;
     private ShowScreen _showScreenScript;
@@ -12,7 +12,7 @@ public class Play : MonoBehaviour, IPointerDownHandler
         _showScreenScript = loadScreen.GetComponent<ShowScreen>();
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)
     {
         loadScreen.SetActive(true);
         _showScreenScript.Show("GameScene");

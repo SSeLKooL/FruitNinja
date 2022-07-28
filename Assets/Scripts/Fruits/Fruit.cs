@@ -12,6 +12,7 @@ public class Fruit : MonoBehaviour
     
     public Camera currentCamera;
     public Spawner spawner;
+    public PlayerConfiguration PlayerConfiguration;
 
     private GameObject _fruit;
     
@@ -101,6 +102,9 @@ public class Fruit : MonoBehaviour
 
     private void Update()
     {
-        CheckTouch();
+        if (!PlayerConfiguration.CheckGameStatus())
+        {
+            CheckTouch();
+        }
     }
 }

@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Exit : MonoBehaviour, IPointerDownHandler
+public class Exit : MonoBehaviour, IPointerUpHandler
 {
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)
     {
         Application.Quit();
     }
