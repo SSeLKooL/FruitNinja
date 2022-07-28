@@ -1,6 +1,6 @@
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerConfiguration : MonoBehaviour
 {
@@ -11,10 +11,19 @@ public class PlayerConfiguration : MonoBehaviour
     private float _currentScore;
     private int _newScore;
     [SerializeField] private HealthBar healthBar;
-    [SerializeField] private Text scoreText;
+
+    [SerializeField] private GameObject bestScoreObject;
+    [SerializeField] private GameObject scoreObject;
+    private TextMeshProUGUI _bestScoreText;
+    private TextMeshProUGUI _scoreText;
+    
     [SerializeField] private SpawnController spawnController;
 
+    private string _best = "лучший: ";
+
     private bool _stop;
+
+    private float _bestScore;
 
     private void GameOver()
     {
@@ -27,6 +36,20 @@ public class PlayerConfiguration : MonoBehaviour
         _currentHealth = maxHealth;
         _newHealth = maxHealth;
         healthBar.CreateHealthBar(maxHealth);
+
+        _bestScoreText = bestScoreObject.GetComponent<TextMeshProUGUI>();
+        _scoreText = scoreObject.GetComponent<TextMeshProUGUI>();
+        
+        if (PlayerPrefs.HasKey("RecordScore"))
+        {
+            _bestScore = PlayerPrefs.GetInt("RecordScore");
+        }
+        else
+        {
+            _bestScore = 0;
+        }
+
+        _bestScoreText.text = _best + _bestScore;
     }
 
     public void AddScorePoints(int points)
@@ -59,7 +82,17 @@ public class PlayerConfiguration : MonoBehaviour
     private void UpdateScore()
     {
         _currentScore = math.lerp(_currentScore, _newScore, scoreAddQuotient);
-        scoreText.text = Mathf.RoundToInt(_currentScore).ToString();
+        
+        if (_newScore > _bestScore)
+        {
+            _bestScore = math.lerp(_bestScore, _newScore, scoreAddQuotient);
+            PlayerPrefs.SetInt("RecordScore", _newScore);
+            PlayerPrefs.Save();
+        }
+        
+        _scoreText.text = Mathf.RoundToInt(_currentScore).ToString();
+        _bestScoreText.text = _best + Mathf.RoundToInt(_bestScore);
+        
     }
 
     private void Update()

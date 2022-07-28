@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class SpawnController : MonoBehaviour
@@ -81,7 +80,6 @@ public class SpawnController : MonoBehaviour
                 _throwPackTimer.SetTimer(throwPackDelayTime);
 
                 packCount++;
-                throwPackDelayTime *= timeDecreaseQuotient;
                 throwObjectDelayTime *= timeDecreaseQuotient;
                 _objectsToThrowCount = packCount;
             }
