@@ -5,10 +5,14 @@ public class HealthBar : MonoBehaviour
 {
     private List<GameObject> hearts = new List<GameObject>();
 
-    [SerializeField] private float distanceBetweenHearts;
+    [SerializeField] private float distanceBetweenHeartsX;
+    [SerializeField] private float distanceBetweenHeartsY;
+    [SerializeField] private int heartPerLineCount;
+    [SerializeField] private int maxHealth;
     [SerializeField] private GameObject heartPrefab;
     private Vector3 _currentHeartPosition;
     private int _currentHeartIndex = -1;
+    private int _currentColumnIndex = -1;
 
     public void CreateHealthBar(int health)
     {
@@ -22,16 +26,30 @@ public class HealthBar : MonoBehaviour
 
     private void CreateHeart()
     {
-        var heart = Instantiate(heartPrefab, _currentHeartPosition, Quaternion.identity, this.gameObject.transform);
-        hearts.Add(heart);
+        if (_currentHeartIndex < maxHealth - 1)
+        {
+            var heart = Instantiate(heartPrefab, _currentHeartPosition, Quaternion.identity, this.gameObject.transform);
+            hearts.Add(heart);
 
-        _currentHeartPosition.x -= distanceBetweenHearts;
-        _currentHeartIndex++;
+            _currentColumnIndex++;
+            _currentHeartIndex++;
+
+            if (_currentColumnIndex == heartPerLineCount - 1)
+            {
+                _currentHeartPosition.x = this.gameObject.transform.position.x;
+                _currentHeartPosition.y -= distanceBetweenHeartsY;
+                _currentColumnIndex = -1;
+            }
+            else
+            {
+                _currentHeartPosition.x -= distanceBetweenHeartsX;
+            }
+        }
     }
 
     public void RemoveHeart()
     {
-        hearts[_currentHeartIndex].SetActive(false);
+        Destroy(hearts[_currentHeartIndex]);
         _currentHeartIndex--;
     }
 }

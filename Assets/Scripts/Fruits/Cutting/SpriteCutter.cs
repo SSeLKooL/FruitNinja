@@ -28,6 +28,9 @@ public class SpriteCutter : MonoBehaviour
     private ObjectPhysics _leftSideObjectPhysics;
     private ObjectPhysics _rightSideObjectPhysics;
 
+    private MeshRenderer _leftSideMeshRenderer;
+    private MeshRenderer _rightSideMeshRenderer;
+
     private void DivideVertices(Vector2 p1, Vector2 p2, bool[] isAtLeftSide, List<Vector3> leftSideVertices, List<Vector3> rightSideVertices, int[] newIndexes)
     {
         for (var i = 0; i < _currentVertices.Length; i++)
@@ -258,9 +261,11 @@ public class SpriteCutter : MonoBehaviour
         
         _currentMaterial = materials[materialIndex];
 
-        _rightSideObject.GetComponent<MeshRenderer>().material = _currentMaterial;
-        _leftSideObject.GetComponent<MeshRenderer>().material = _currentMaterial;
-
+        _rightSideMeshRenderer = _rightSideObject.GetComponent<MeshRenderer>();
+        _leftSideMeshRenderer = _leftSideObject.GetComponent<MeshRenderer>();
+        _leftSideMeshRenderer.material = _rightSideMeshRenderer.material = _currentMaterial;
+        _rightSideMeshRenderer.sortingOrder = 1;
+        _leftSideMeshRenderer.sortingOrder = 1;
         _leftSideObject.transform.localScale = _rightSideObject.transform.localScale = objectToCut.transform.localScale;
 
         _leftSideObjectPhysics = _leftSideObject.GetComponent<ObjectPhysics>();

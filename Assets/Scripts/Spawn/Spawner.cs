@@ -1,10 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject fruitPrefab;
     [SerializeField] private GameObject blobPrefab;
+    [SerializeField] private GameObject cutEffectPrefab;
+    
+    [SerializeField] private Transform fruitParentTransform;
+    [SerializeField] private Transform blobParentTransform;
+    [SerializeField] private Transform cutEffectParentTransform;
     
     private ObjectPhysics _physicsScript;
     private Fruit _fruitScript;
@@ -17,9 +23,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float minSpeedY;
     [SerializeField] private GameObject spawnerLeft;
     [SerializeField] private GameObject spawnerRight;
-
-    [SerializeField] private Transform fruitParentTransform;
-    [SerializeField] private Transform blobParentTransform;
+    
     [SerializeField] private SpriteCutter spriteCutter;
     [SerializeField] private PlayerConfiguration playerConfiguration;
     [SerializeField] private Camera currentCamera;
@@ -47,7 +51,11 @@ public class Spawner : MonoBehaviour
     {
         playerConfiguration.AddScorePoints(scoreForExecution);
         var blob = Instantiate(blobPrefab, fruit.transform.position, Quaternion.identity, blobParentTransform);
+        Debug.Log(spriteIndex);
         blob.GetComponent<SpriteRenderer>().sprite = blobs[spriteIndex];
+        Debug.Log("ok");
+        var cutEffect = Instantiate(cutEffectPrefab, fruit.transform.position, Quaternion.identity, cutEffectParentTransform);
+        cutEffect.GetComponent<CutEffect>().SetParticles(spriteIndex);
         spriteCutter.CutObject(fruit, fruitParentTransform, currentSprite, spriteIndex, firstTapPosition,secondTapPosition, fruit.GetComponent<ObjectPhysics>().direction, playerConfiguration);
         Destroy(fruit);
     }

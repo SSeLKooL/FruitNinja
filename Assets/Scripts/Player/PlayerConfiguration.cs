@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerConfiguration : MonoBehaviour
 {
-    [SerializeField] private int maxHealth;
+    [SerializeField] private int startHealth;
     [SerializeField] private float scoreAddQuotient;
     private int _currentHealth;
     private int _newHealth;
@@ -18,6 +18,8 @@ public class PlayerConfiguration : MonoBehaviour
     private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI resultScoreText;
     [SerializeField] private TextMeshProUGUI resultBestScoreText;
+
+    [SerializeField] private TrailRenderer touchTrail;
     
     [SerializeField] private SpawnController spawnController;
 
@@ -38,6 +40,8 @@ public class PlayerConfiguration : MonoBehaviour
     {
         _stop = true;
         spawnController.Stop();
+        touchTrail.emitting = false;
+        
         if (_newScore > _bestScore)
         {
             PlayerPrefs.SetInt("RecordScore", _newScore);
@@ -56,9 +60,9 @@ public class PlayerConfiguration : MonoBehaviour
 
     private void Start()
     {
-        _currentHealth = maxHealth;
-        _newHealth = maxHealth;
-        healthBar.CreateHealthBar(maxHealth);
+        _currentHealth = startHealth;
+        _newHealth = startHealth;
+        healthBar.CreateHealthBar(startHealth);
 
         _bestScoreText = bestScoreObject.GetComponent<TextMeshProUGUI>();
         _scoreText = scoreObject.GetComponent<TextMeshProUGUI>();
