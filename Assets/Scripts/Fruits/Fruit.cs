@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 public class Fruit : MonoBehaviour
 {
-    [SerializeField] private float spriteSize;
+    private float spriteSize;
 
     [SerializeField] private float sliceRange;
     
@@ -50,7 +50,7 @@ public class Fruit : MonoBehaviour
             if (Input.touchCount > 0)
             {
                 var touch = Input.touches[0];
-                Debug.Log("touch");
+
                 if (touch.phase == TouchPhase.Moved)
                 {
                     _firstTapPosition = currentCamera.ScreenToWorldPoint(touch.position);
