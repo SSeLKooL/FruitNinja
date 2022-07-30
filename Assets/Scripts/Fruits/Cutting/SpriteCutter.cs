@@ -25,6 +25,7 @@ public class SpriteCutter : MonoBehaviour
 
     [SerializeField] private GameObject slicePrefab;
     [SerializeField] private float Force;
+    
     private Vector2 _leftSideDirection;
     private Vector2 _rightSideDirection;
     
@@ -34,7 +35,13 @@ public class SpriteCutter : MonoBehaviour
     private MeshRenderer _leftSideMeshRenderer;
     private MeshRenderer _rightSideMeshRenderer;
 
-    [SerializeField] private LineRenderer testLineRenderer;
+    [SerializeField] private LineRenderer testUpLine;
+    [SerializeField] private LineRenderer testDownLine;
+
+    private bool CheckVertex(Vector2 p0, Vector2 p1, Vector2 p2)
+    {
+        return p0.x * (p2.y - p1.y) + p1.x * (p0.y - p2.y) + p2.x * (p1.y - p0.y) > 0;
+    }
 
     private void DivideVertices(Vector2 p1, Vector2 p2, bool[] isAtLeftSide, List<Vector3> leftSideVertices, List<Vector3> rightSideVertices, int[] newIndexes)
     {
@@ -42,7 +49,7 @@ public class SpriteCutter : MonoBehaviour
         {
             var p0 = new Vector2(_currentVertices[i].x, _currentVertices[i].y);
             
-            if (p0.x * (p2.y - p1.y) + p1.x * (p0.y - p2.y) + p2.x * (p1.y - p0.y) > 0)
+            if (CheckVertex(p0, p1, p2))
             {
                 isAtLeftSide[i] = true;
                 leftSideVertices.Add(_currentVertices[i]);
@@ -188,17 +195,15 @@ public class SpriteCutter : MonoBehaviour
         }
     }
 
-    private void SetDirection(float A, float B, Vector2 objectToCutDirection)
+    private void SetDirection(float A, float B, float C, Vector2 p1, Vector2 p2, Vector2 objectToCutDirection)
     {
         var e = Force / math.sqrt(A * A + B * B);
-        
-        var Aside = (A > 0)? 1: -1;
-        var Bside = (B > 0)? 1: -1;
-        var side = Aside * Bside;
 
-        _leftSideDirection = new Vector2(-side * B * e, side * A * e);
-        _rightSideDirection = new Vector2(side * B * e, -side * A * e);
-        
+        var side = CheckVertex(new Vector2(A + C, -B), p1, p2) ? 1 : -1;
+
+        _leftSideDirection = new Vector2(side * A * e, -side * B * e);
+        _rightSideDirection = new Vector2(-side * A * e, side * B * e);
+
         _rightSideDirection += objectToCutDirection;
         _leftSideDirection += objectToCutDirection;
     }
@@ -227,6 +232,12 @@ public class SpriteCutter : MonoBehaviour
         var A = p2.y - p1.y;
 
         var B = p1.x - p2.x;
+
+        if (A < 0)
+        {
+            A = -A;
+            B = -B;
+        }
         
         var C = - (A * p1.x + B * p1.y);
 
@@ -244,7 +255,7 @@ public class SpriteCutter : MonoBehaviour
         _rightSideMesh.uv = rightSideUV.ToArray();
         _leftSideMesh.uv = leftSideUV.ToArray();
 
-        SetDirection(A, B, objectToCutDirection);
+        SetDirection(A, B, C, p1, p2, objectToCutDirection);
     }
 
     public GameObject[] CutObject(GameObject objectToCut, Transform parent, Sprite currentSprite, int materialIndex, Vector2 p1, Vector2 p2, Vector2 objectToCutDirection, PlayerConfiguration playerConfiguration)

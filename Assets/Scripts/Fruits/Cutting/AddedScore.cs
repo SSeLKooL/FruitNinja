@@ -41,6 +41,7 @@ public class AddedScore : MonoBehaviour
     {
         _addedScorePosition.y += _posYSpeed * targetIncreaseY * Time.deltaTime;
         _addedScoreTransform.position = _addedScorePosition;
+        
         if (_addedScorePosition.y >= _targetPosY)
         {
             _isDestroy = true;

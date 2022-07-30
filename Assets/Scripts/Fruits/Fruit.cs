@@ -28,6 +28,7 @@ public class Fruit : MonoBehaviour
 
     private Vector2 _firstTapPosition;
     private Vector2 _secondTapPosition;
+    private Vector2 _fruitStartCenter;
 
     private void Start()
     {
@@ -66,6 +67,7 @@ public class Fruit : MonoBehaviour
                     
                     if (CheckCollider(_firstTapPosition))
                     {
+                        _fruitStartCenter = gameObject.transform.position;
                         _startedSlice = true;
                     }
                 }
@@ -76,6 +78,7 @@ public class Fruit : MonoBehaviour
                 
                 if (CheckCollider(_firstTapPosition))
                 {
+                    _fruitStartCenter = gameObject.transform.position;
                     _startedSlice = true;
                 }
             }
@@ -88,6 +91,9 @@ public class Fruit : MonoBehaviour
             
                 _secondTapPosition = currentCamera.ScreenToWorldPoint(touch.position);
                 
+                _firstTapPosition += _fruitStartCenter - (Vector2) gameObject.transform.position;
+                _fruitStartCenter = gameObject.transform.position;
+                
                 if (Vector2.Distance(_secondTapPosition, _firstTapPosition) > sliceRange)
                 {
                     spawner.ExecuteFruit(_fruit, fruits[_spriteIndex], _spriteIndex, _firstTapPosition, _secondTapPosition, _rangeX, _rangeY);
@@ -96,6 +102,9 @@ public class Fruit : MonoBehaviour
             else if (Input.GetMouseButton(0))
             {
                 _secondTapPosition = currentCamera.ScreenToWorldPoint(Input.mousePosition);
+                
+                _firstTapPosition += _fruitStartCenter - (Vector2) gameObject.transform.position;
+                _fruitStartCenter = gameObject.transform.position;
                 
                 if (Vector2.Distance(_secondTapPosition, _firstTapPosition) > sliceRange)
                 {

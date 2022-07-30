@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -6,16 +7,22 @@ public class PlayerConfiguration : MonoBehaviour
 {
     [SerializeField] private int startHealth;
     [SerializeField] private float scoreAddQuotient;
+    [SerializeField] private float minScoreSpeed;
+
+    private float _currentScoreSpeed;
     private int _currentHealth;
     private int _newHealth;
     private float _currentScore;
     private int _newScore;
+    
     [SerializeField] private HealthBar healthBar;
 
     [SerializeField] private GameObject bestScoreObject;
     [SerializeField] private GameObject scoreObject;
+    
     private TextMeshProUGUI _bestScoreText;
     private TextMeshProUGUI _scoreText;
+    
     [SerializeField] private TextMeshProUGUI resultScoreText;
     [SerializeField] private TextMeshProUGUI resultBestScoreText;
 
@@ -108,11 +115,16 @@ public class PlayerConfiguration : MonoBehaviour
 
     private void UpdateScore()
     {
-        _currentScore = math.lerp(_currentScore, _newScore, scoreAddQuotient);
+        _currentScoreSpeed = Math.Max((_newScore - _currentScore) * scoreAddQuotient, minScoreSpeed);
+
+        if (_currentScore < _newScore)
+        {
+            _currentScore += _currentScoreSpeed * Time.deltaTime;
+        }
         
         if (_newScore > _bestScore)
         {
-            _bestScore = math.lerp(_bestScore, _newScore, scoreAddQuotient);
+            _bestScore = _currentScore;
         }
         
         _scoreText.text = Mathf.RoundToInt(_currentScore).ToString();

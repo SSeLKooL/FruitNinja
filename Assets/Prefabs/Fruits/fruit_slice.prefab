@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitation: 21
-  maxSizeIncrease: 1
-  minSizeIncrease: 0.5
+  maxSizeIncrease: 0.3
+  minSizeIncrease: 0.3
   angleIncreaseQuotient: 20
   direction: {x: 0, y: 0, z: 0}
   playerConfiguration: {fileID: 0}

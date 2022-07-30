@@ -16,6 +16,8 @@ public class ObjectPhysics : MonoBehaviour
 
     private Quaternion _angleCurrentValue;
     private Vector3 _currentSizeIncrease;
+
+    private int SpeedSide;
     
     [SerializeField] private float startPositionY;
     
@@ -24,8 +26,10 @@ public class ObjectPhysics : MonoBehaviour
     private void Start()
     {
         _thisObject = this.gameObject;
-        _currentSizeIncrease.z = Random.Range(minSizeIncrease, maxSizeIncrease);
+        _currentSizeIncrease.y = Random.Range(minSizeIncrease, maxSizeIncrease);
+        _currentSizeIncrease.x = _currentSizeIncrease.y;
         _angleCurrentValue = _thisObject.transform.rotation;
+        SpeedSide = (direction.x > 0) ? 1 : -1;
     }
     
     private void CheckPosition()
@@ -50,7 +54,7 @@ public class ObjectPhysics : MonoBehaviour
         _thisObject.transform.position += direction * Time.deltaTime;
         direction.y -= gravitation * Time.deltaTime;
 
-        _angleCurrentValue.eulerAngles += new Vector3(0, 0, angleIncreaseQuotient * Time.deltaTime);
+        _angleCurrentValue.eulerAngles -= new Vector3(0, 0, SpeedSide * angleIncreaseQuotient * Time.deltaTime);
         _thisObject.transform.rotation = _angleCurrentValue;
 
         _thisObject.transform.localScale += _currentSizeIncrease * Time.deltaTime;

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2333015940855386101}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.0032487, y: -3.1035883, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,9 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a654c86e77133b846b53a84a8aaaeb02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteSize: 1
-  scoreForExecution: 100
-  sliceRange: 0.1
+  sliceRange: 0.3
   fruits:
   - {fileID: 21300000, guid: 809d5628e5aa03442a4498593fe7b3ca, type: 3}
   - {fileID: 21300000, guid: cd2b81e64fbbc9947825602773924995, type: 3}
@@ -108,9 +106,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 528889904e220b246ae1a56efb5aa5b4, type: 3}
   - {fileID: 21300000, guid: 27f012152d170054184605e391f19939, type: 3}
   - {fileID: 21300000, guid: 46385ae321a70d140b88152357f89ff8, type: 3}
-  spriteCutter: {fileID: 0}
   currentCamera: {fileID: 0}
-  playerConfiguration: {fileID: 0}
+  spawner: {fileID: 0}
+  PlayerConfiguration: {fileID: 0}
 --- !u!114 &-7330618772597688727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,9 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitation: 21
-  maxSizeIncrease: 1
-  minSizeIncrease: 0.5
-  angleIncreaseQuotient: 20
+  maxSizeIncrease: 0.3
+  minSizeIncrease: 0.3
+  angleIncreaseQuotient: 60
   direction: {x: 0, y: 0, z: 0}
   playerConfiguration: {fileID: 0}
   startPositionY: -8
