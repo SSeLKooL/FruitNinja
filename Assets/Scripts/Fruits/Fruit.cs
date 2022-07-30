@@ -38,11 +38,16 @@ public class Fruit : MonoBehaviour
         spriteRangeX = (fruits[_spriteIndex].rect.width) / (2 * PixelsPerUnit);
     }
 
-    private bool CheckCollider(Vector2 currentPosition)
+    private void SetRange()
     {
         _rangeX = _fruit.transform.localScale.x * spriteRangeX;
         _rangeY = _fruit.transform.localScale.y * spriteRangeY;
+    }
 
+    private bool CheckCollider(Vector2 currentPosition)
+    {
+        SetRange();
+        
         return Math.Pow(_fruit.transform.position.x - currentPosition.x, 2) / (_rangeX * _rangeX) +
             Math.Pow(_fruit.transform.position.y - currentPosition.y, 2) / (_rangeY * _rangeY) <= 1;
     }
@@ -85,7 +90,7 @@ public class Fruit : MonoBehaviour
                 
                 if (Vector2.Distance(_secondTapPosition, _firstTapPosition) > sliceRange)
                 {
-                    spawner.ExecuteFruit(_fruit, fruits[_spriteIndex], _spriteIndex, _firstTapPosition, _secondTapPosition);
+                    spawner.ExecuteFruit(_fruit, fruits[_spriteIndex], _spriteIndex, _firstTapPosition, _secondTapPosition, _rangeX, _rangeY);
                 }
             }
             else if (Input.GetMouseButton(0))
@@ -94,7 +99,7 @@ public class Fruit : MonoBehaviour
                 
                 if (Vector2.Distance(_secondTapPosition, _firstTapPosition) > sliceRange)
                 {
-                    spawner.ExecuteFruit(_fruit, fruits[_spriteIndex], _spriteIndex, _firstTapPosition, _secondTapPosition);
+                    spawner.ExecuteFruit(_fruit, fruits[_spriteIndex], _spriteIndex, _firstTapPosition, _secondTapPosition, _rangeX, _rangeY);
                 }
             }
             else

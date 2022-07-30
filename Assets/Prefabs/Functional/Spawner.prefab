@@ -175,9 +175,11 @@ MonoBehaviour:
   fruitPrefab: {fileID: 2333015940855386101, guid: 8dd62e7375c1fdb48bd9c35c929c160f, type: 3}
   blobPrefab: {fileID: 8321082201876498690, guid: b69ed3dfe6f457b498d6736f6911a63a, type: 3}
   cutEffectPrefab: {fileID: 4765224187591802883, guid: 10f10cf29c86a1642aa381d5d8b4f544, type: 3}
+  addedScorePrefab: {fileID: 8075119901517315139, guid: bef847eae623d594b9eb3088a3b0e65d, type: 3}
   fruitParentTransform: {fileID: 0}
   blobParentTransform: {fileID: 0}
   cutEffectParentTransform: {fileID: 0}
+  addedScoreParentTransform: {fileID: 0}
   scoreForExecution: 100
   maxSpeedX: 0.2
   minSpeedX: -0.2

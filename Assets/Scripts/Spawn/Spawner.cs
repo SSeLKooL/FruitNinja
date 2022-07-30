@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -7,11 +8,13 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject fruitPrefab;
     [SerializeField] private GameObject blobPrefab;
     [SerializeField] private GameObject cutEffectPrefab;
-    
+    [SerializeField] private GameObject addedScorePrefab;
+
     [SerializeField] private Transform fruitParentTransform;
     [SerializeField] private Transform blobParentTransform;
     [SerializeField] private Transform cutEffectParentTransform;
-    
+    [SerializeField] private Transform addedScoreParentTransform;
+
     private ObjectPhysics _physicsScript;
     private Fruit _fruitScript;
     
@@ -47,7 +50,16 @@ public class Spawner : MonoBehaviour
         _y = spawnerRight.transform.position.y;
     }
 
-    public void ExecuteFruit(GameObject fruit, Sprite currentSprite, int spriteIndex, Vector2 firstTapPosition, Vector2 secondTapPosition)
+    private void SpawnAddedScore(float rangeX, float rangeY, Vector2 center)
+    {
+        var addedScorePosition = new Vector2(Random.Range(center.x - rangeX, center.x + rangeX), Random.Range(center.y - rangeY, center.y + rangeY));
+        
+        var addedScore = Instantiate(addedScorePrefab, addedScorePosition, Quaternion.identity, addedScoreParentTransform);
+        
+        addedScore.GetComponent<TextMeshProUGUI>().text = scoreForExecution.ToString();
+    }
+
+    public void ExecuteFruit(GameObject fruit, Sprite currentSprite, int spriteIndex, Vector2 firstTapPosition, Vector2 secondTapPosition, float rangeX, float rangeY)
     {
         playerConfiguration.AddScorePoints(scoreForExecution);
         var blob = Instantiate(blobPrefab, fruit.transform.position, Quaternion.identity, blobParentTransform);
@@ -56,6 +68,9 @@ public class Spawner : MonoBehaviour
         var cutEffect = Instantiate(cutEffectPrefab, fruit.transform.position, Quaternion.identity, cutEffectParentTransform);
         cutEffect.GetComponent<CutEffect>().SetParticles(spriteIndex);
         spriteCutter.CutObject(fruit, fruitParentTransform, currentSprite, spriteIndex, firstTapPosition,secondTapPosition, fruit.GetComponent<ObjectPhysics>().direction, playerConfiguration);
+
+        SpawnAddedScore(rangeX, rangeY, fruit.transform.position);
+        
         Destroy(fruit);
     }
 
