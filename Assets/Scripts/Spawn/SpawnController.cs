@@ -7,6 +7,7 @@ public class SpawnController : MonoBehaviour
     
     [SerializeField] private GameObject fruitPrefab;
     [SerializeField] private GameObject bonusHeardPrefab;
+    [SerializeField] private GameObject bonusBombPrefab;
 
     [SerializeField] private Spawner[] spawners = new Spawner[SpawnersCount];
     
@@ -15,7 +16,8 @@ public class SpawnController : MonoBehaviour
     [SerializeField] private float throwPackDelayTime;
     [SerializeField] private float timeDecreaseQuotient;
 
-    [SerializeField] private float heardSpawnChance;
+    [SerializeField] private float heartSpawnChance;
+    [SerializeField] private float bombSpawnChance;
 
     private int _objectsToThrowCount; 
     
@@ -70,10 +72,18 @@ public class SpawnController : MonoBehaviour
     private GameObject GetObjectToSpawn()
     {
         var currentFraction = Random.Range(0, 1f);
+        var currentChance = heartSpawnChance;
 
-        if (currentFraction < heardSpawnChance)
+        if (currentFraction < currentChance)
         {
             return bonusHeardPrefab;
+        }
+
+        currentChance += bombSpawnChance;
+
+        if (currentFraction < currentChance)
+        {
+            return bonusBombPrefab;
         }
         
         return fruitPrefab;

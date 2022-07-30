@@ -1633,6 +1633,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 82255008}
     - target: {fileID: 2737642016686358667, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
+      propertyPath: effectParentTransform
+      value: 
+      objectReference: {fileID: 1189302902}
+    - target: {fileID: 2737642016686358667, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
       propertyPath: cutEffectParentTransform
       value: 
       objectReference: {fileID: 1189302902}
@@ -1851,6 +1855,10 @@ PrefabInstance:
       propertyPath: FruitsParentTransform
       value: 
       objectReference: {fileID: 82255008}
+    - target: {fileID: 2737642016686358667, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
+      propertyPath: effectParentTransform
+      value: 
+      objectReference: {fileID: 1189302902}
     - target: {fileID: 2737642016686358667, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
       propertyPath: cutEffectParentTransform
       value: 
@@ -2258,6 +2266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitPrefab: {fileID: 2333015940855386101, guid: 8dd62e7375c1fdb48bd9c35c929c160f, type: 3}
   bonusHeardPrefab: {fileID: 7890755430006918420, guid: 166f62fd8653c6d41a582ea16dd6691b, type: 3}
+  bonusBombPrefab: {fileID: 1438182720127511441, guid: 92579044645278843af40995df9e32f8, type: 3}
   spawners:
   - {fileID: 502210874}
   - {fileID: 935251840}
@@ -2266,7 +2275,8 @@ MonoBehaviour:
   throwObjectDelayTime: 1.5
   throwPackDelayTime: 3
   timeDecreaseQuotient: 0.85
-  heardSpawnChance: 0.1
+  heartSpawnChance: 0.1
+  bombSpawnChance: 0.1
 --- !u!1 &1291011478
 GameObject:
   m_ObjectHideFlags: 0
@@ -3405,6 +3415,10 @@ PrefabInstance:
       propertyPath: FruitsParentTransform
       value: 
       objectReference: {fileID: 82255008}
+    - target: {fileID: 2737642016686358667, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
+      propertyPath: effectParentTransform
+      value: 
+      objectReference: {fileID: 1189302902}
     - target: {fileID: 2737642016686358667, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
       propertyPath: cutEffectParentTransform
       value: 

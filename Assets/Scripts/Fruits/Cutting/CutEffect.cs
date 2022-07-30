@@ -8,11 +8,14 @@ public class CutEffect : MonoBehaviour
 {
     [SerializeField] private ParticleSystemRenderer[] particleSystems;
     [SerializeField] private Material[] particlesMaterials;
+    [SerializeField] private float lifeTime;
 
     private const int GreenParticleIndex = 0;
     private const int PurpleParticleIndex = 1;
     private const int RedParticleIndex = 2;
     private const int YellowParticleIndex = 3;
+    
+    private float _currentTime;
 
     private int GetParticleIndex(int spriteIndex)
     {
@@ -46,6 +49,16 @@ public class CutEffect : MonoBehaviour
         for (var i = 0; i < particleSystems.Length; i++)
         {
             particleSystems[i].material = particlesMaterials[particleIndex + i];
+        }
+    }
+
+    public void Update()
+    {
+        _currentTime += Time.deltaTime;
+        
+        if (_currentTime > lifeTime)
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -4,6 +4,8 @@ using Random = UnityEngine.Random;
 
 public class Fruit : MonoBehaviour
 {
+    [SerializeField] private int scoreForExecution;
+    
     [SerializeField] private float sliceRange;
 
     [SerializeField] private Sprite[] fruits;
@@ -21,8 +23,8 @@ public class Fruit : MonoBehaviour
     private float SpriteRangeX;
     private float SpriteRangeY;
 
-    private float _rangeX;
-    private float _rangeY;
+    protected float RangeX;
+    protected float RangeY;
 
     private bool _startedSlice;
 
@@ -49,21 +51,26 @@ public class Fruit : MonoBehaviour
 
     private void SetRange()
     {
-        _rangeX = gameObject.transform.localScale.x * SpriteRangeX;
-        _rangeY = gameObject.transform.localScale.y * SpriteRangeY;
+        RangeX = gameObject.transform.localScale.x * SpriteRangeX;
+        RangeY = gameObject.transform.localScale.y * SpriteRangeY;
     }
 
     private bool CheckCollider(Vector2 currentPosition)
     {
         SetRange();
         
-        return Math.Pow(_fruit.transform.position.x - currentPosition.x, 2) / (_rangeX * _rangeX) +
-            Math.Pow(_fruit.transform.position.y - currentPosition.y, 2) / (_rangeY * _rangeY) <= 1;
+        return Math.Pow(_fruit.transform.position.x - currentPosition.x, 2) / (RangeX * RangeX) +
+            Math.Pow(_fruit.transform.position.y - currentPosition.y, 2) / (RangeY * RangeY) <= 1;
     }
 
     protected virtual void CutBehavior()
     {
-        spawner.ExecuteFruit(gameObject, CurrentSprite, _spriteIndex, FirstTapPosition, SecondTapPosition, _rangeX, _rangeY);
+        playerConfiguration.AddScorePoints(scoreForExecution);
+        
+        spawner.SpawnBlob(_spriteIndex, gameObject.transform.position);
+        spawner.SpawnParticleCutEffect(_spriteIndex, gameObject.transform.position);
+        spawner.SpawnText(RangeX, RangeY, gameObject.transform.position, scoreForExecution.ToString());
+        spawner.ExecuteFruit(gameObject, CurrentSprite, _spriteIndex, FirstTapPosition, SecondTapPosition);
     }
 
     private void CheckTouch()

@@ -12,14 +12,12 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] private Transform fruitParentTransform;
     [SerializeField] private Transform blobParentTransform;
-    [SerializeField] private Transform cutEffectParentTransform;
+    [SerializeField] private Transform effectParentTransform;
     [SerializeField] private Transform addedScoreParentTransform;
 
     private ObjectPhysics _physicsScript;
     private Fruit _fruitScript;
 
-    [SerializeField] private int scoreForExecution;
-    
     [SerializeField] private float maxSpeedX;
     [SerializeField] private float minSpeedX;
     [SerializeField] private float maxSpeedY;
@@ -50,34 +48,48 @@ public class Spawner : MonoBehaviour
         _y = spawnerRight.transform.position.y;
     }
 
-    private void SpawnAddedScore(float rangeX, float rangeY, Vector2 center)
+    public void SpawnText(float rangeX, float rangeY, Vector2 center, string text)
     {
-        var addedScorePosition = new Vector2(Random.Range(center.x - rangeX, center.x + rangeX), Random.Range(center.y - rangeY, center.y + rangeY));
+        var textPosition = new Vector2(Random.Range(center.x - rangeX, center.x + rangeX), Random.Range(center.y - rangeY, center.y + rangeY));
         
-        var addedScore = Instantiate(addedScorePrefab, addedScorePosition, Quaternion.identity, addedScoreParentTransform);
+        var spawnedText = Instantiate(addedScorePrefab, textPosition, Quaternion.identity, addedScoreParentTransform);
         
-        addedScore.GetComponent<TextMeshProUGUI>().text = scoreForExecution.ToString();
+        spawnedText.GetComponent<TextMeshProUGUI>().text = text;
     }
     
-    public void ExecuteFruit(GameObject fruit, Sprite currentSprite, int spriteIndex, Vector2 firstTapPosition, Vector2 secondTapPosition, float rangeX, float rangeY)
+    public void SpawnText(float rangeX, float rangeY, Vector2 center, float scaleMultiplier, string text)
     {
-        playerConfiguration.AddScorePoints(scoreForExecution);
-        var blob = Instantiate(blobPrefab, fruit.transform.position, Quaternion.identity, blobParentTransform);
-        blob.GetComponent<SpriteRenderer>().sprite = blobs[spriteIndex];
+        var textPosition = new Vector2(Random.Range(center.x - rangeX, center.x + rangeX), Random.Range(center.y - rangeY, center.y + rangeY));
         
-        var cutEffect = Instantiate(cutEffectPrefab, fruit.transform.position, Quaternion.identity, cutEffectParentTransform);
-        cutEffect.GetComponent<CutEffect>().SetParticles(spriteIndex);
-        spriteCutter.CutObject(fruit, fruitParentTransform, currentSprite, spriteIndex, firstTapPosition,secondTapPosition, fruit.GetComponent<ObjectPhysics>().direction, playerConfiguration);
-
-        SpawnAddedScore(rangeX, rangeY, fruit.transform.position);
+        var spawnedText = Instantiate(addedScorePrefab, textPosition, Quaternion.identity, addedScoreParentTransform);
         
+        spawnedText.transform.localScale *= scaleMultiplier;
+        
+        spawnedText.GetComponent<TextMeshProUGUI>().text = text;
+    }
+    
+    public void ExecuteFruit(GameObject fruit, Sprite currentSprite, int materialIndex, Vector2 firstTapPosition, Vector2 secondTapPosition)
+    {
+        spriteCutter.CutObject(fruit, fruitParentTransform, currentSprite, materialIndex, firstTapPosition,secondTapPosition, fruit.GetComponent<ObjectPhysics>().direction, playerConfiguration);
         Destroy(fruit);
     }
 
-    public void ExecuteBonus(GameObject bonus, Sprite bonusSprite, int bonusIndex, Vector2 firstTapPosition, Vector2 secondTapPosition)
+    public void SpawnBlob(int blobIndex, Vector3 position)
     {
-        spriteCutter.CutObject(bonus, fruitParentTransform, bonusSprite, bonusIndex, firstTapPosition,secondTapPosition, bonus.GetComponent<ObjectPhysics>().direction, playerConfiguration);
-        Destroy(bonus);
+        var blob = Instantiate(blobPrefab, position, Quaternion.identity, blobParentTransform);
+        blob.GetComponent<SpriteRenderer>().sprite = blobs[blobIndex];
+    }
+
+    public GameObject SpawnEffect(GameObject effectPrefab, Vector3 position)
+    { 
+        var effectObject = Instantiate(effectPrefab, position, Quaternion.identity, effectParentTransform);
+        return effectObject;
+    }
+
+    public void SpawnParticleCutEffect(int particleIndex, Vector3 position)
+    {
+        var cutEffect = Instantiate(cutEffectPrefab, position, Quaternion.identity, effectParentTransform);
+        cutEffect.GetComponent<CutEffect>().SetParticles(particleIndex);
     }
 
     public void SpawnObject(GameObject objectPrefab)
