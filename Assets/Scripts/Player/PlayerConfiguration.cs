@@ -10,7 +10,6 @@ public class PlayerConfiguration : MonoBehaviour
     [SerializeField] private float minScoreSpeed;
 
     private float _currentScoreSpeed;
-    private int _currentHealth;
     private int _newHealth;
     private float _currentScore;
     private int _newScore;
@@ -67,7 +66,6 @@ public class PlayerConfiguration : MonoBehaviour
 
     private void Start()
     {
-        _currentHealth = startHealth;
         _newHealth = startHealth;
         healthBar.CreateHealthBar(startHealth);
 
@@ -99,17 +97,23 @@ public class PlayerConfiguration : MonoBehaviour
         if (!_stop)
         {
             _newHealth--;
-            
-            if (_newHealth < _currentHealth)
-            {
-                _currentHealth--;
-                healthBar.RemoveHeart();
-            }
+
+            healthBar.RemoveHeart();
 
             if (_newHealth == 0)
             {
                 GameOver();
             }
+        }
+    }
+
+    public void HealPlayer()
+    {
+        if (!_stop)
+        {
+            _newHealth++;
+
+            healthBar.AddHealth(1);
         }
     }
 

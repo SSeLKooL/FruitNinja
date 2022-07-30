@@ -4,6 +4,9 @@ using Random = UnityEngine.Random;
 public class SpawnController : MonoBehaviour
 {
     private const int SpawnersCount = 3;
+    
+    [SerializeField] private GameObject fruitPrefab;
+    [SerializeField] private GameObject bonusHeardPrefab;
 
     [SerializeField] private Spawner[] spawners = new Spawner[SpawnersCount];
     
@@ -11,6 +14,8 @@ public class SpawnController : MonoBehaviour
     [SerializeField] private float throwObjectDelayTime;
     [SerializeField] private float throwPackDelayTime;
     [SerializeField] private float timeDecreaseQuotient;
+
+    [SerializeField] private float heardSpawnChance;
 
     private int _objectsToThrowCount; 
     
@@ -62,6 +67,18 @@ public class SpawnController : MonoBehaviour
         _objectsToThrowCount = packCount;
     }
 
+    private GameObject GetObjectToSpawn()
+    {
+        var currentFraction = Random.Range(0, 1f);
+
+        if (currentFraction < heardSpawnChance)
+        {
+            return bonusHeardPrefab;
+        }
+        
+        return fruitPrefab;
+    }
+
     private void Spawn()
     {
         _throwPackTimer.UpdateTimer();
@@ -73,7 +90,7 @@ public class SpawnController : MonoBehaviour
             
             _objectsToThrowCount--;
 
-            spawners[Random.Range(0, SpawnersCount)].SpawnObject();
+            spawners[Random.Range(0, SpawnersCount)].SpawnObject(GetObjectToSpawn());
 
             if (_objectsToThrowCount == 0)
             {

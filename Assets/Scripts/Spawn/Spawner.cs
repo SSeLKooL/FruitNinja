@@ -1,11 +1,11 @@
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject fruitPrefab;
     [SerializeField] private GameObject blobPrefab;
     [SerializeField] private GameObject cutEffectPrefab;
     [SerializeField] private GameObject addedScorePrefab;
@@ -17,7 +17,7 @@ public class Spawner : MonoBehaviour
 
     private ObjectPhysics _physicsScript;
     private Fruit _fruitScript;
-    
+
     [SerializeField] private int scoreForExecution;
     
     [SerializeField] private float maxSpeedX;
@@ -58,7 +58,7 @@ public class Spawner : MonoBehaviour
         
         addedScore.GetComponent<TextMeshProUGUI>().text = scoreForExecution.ToString();
     }
-
+    
     public void ExecuteFruit(GameObject fruit, Sprite currentSprite, int spriteIndex, Vector2 firstTapPosition, Vector2 secondTapPosition, float rangeX, float rangeY)
     {
         playerConfiguration.AddScorePoints(scoreForExecution);
@@ -74,17 +74,23 @@ public class Spawner : MonoBehaviour
         Destroy(fruit);
     }
 
-    public void SpawnObject()
+    public void ExecuteBonus(GameObject bonus, Sprite bonusSprite, int bonusIndex, Vector2 firstTapPosition, Vector2 secondTapPosition)
+    {
+        spriteCutter.CutObject(bonus, fruitParentTransform, bonusSprite, bonusIndex, firstTapPosition,secondTapPosition, bonus.GetComponent<ObjectPhysics>().direction, playerConfiguration);
+        Destroy(bonus);
+    }
+
+    public void SpawnObject(GameObject objectPrefab)
     {
         _currentSpeedX = Random.Range(minSpeedX, maxSpeedX);
         
-        var fruit = Instantiate(fruitPrefab, new Vector3(Random.Range(_leftX, _rightX), _y, 0), Quaternion.identity, fruitParentTransform);
+        var fruit = Instantiate(objectPrefab, new Vector3(Random.Range(_leftX, _rightX), _y, 0), Quaternion.identity, fruitParentTransform);
 
         _physicsScript = fruit.GetComponent<ObjectPhysics>();
         _fruitScript = fruit.GetComponent<Fruit>();
             
         _physicsScript.direction = new Vector3(_currentSpeedX, Random.Range(minSpeedY, maxSpeedY), 0);
-        _physicsScript.playerConfiguration = _fruitScript.PlayerConfiguration = playerConfiguration;
+        _physicsScript.playerConfiguration = _fruitScript.playerConfiguration = playerConfiguration;
         _fruitScript.currentCamera = currentCamera;
         _fruitScript.spawner = _thisSpawner;
     }

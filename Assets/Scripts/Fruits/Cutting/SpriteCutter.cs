@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 
 public class SpriteCutter : MonoBehaviour
@@ -35,10 +36,7 @@ public class SpriteCutter : MonoBehaviour
     private MeshRenderer _leftSideMeshRenderer;
     private MeshRenderer _rightSideMeshRenderer;
 
-    [SerializeField] private LineRenderer testUpLine;
-    [SerializeField] private LineRenderer testDownLine;
-
-    private bool CheckVertex(Vector2 p0, Vector2 p1, Vector2 p2)
+    private static bool CheckVertex(Vector2 p0, Vector2 p1, Vector2 p2)
     {
         return p0.x * (p2.y - p1.y) + p1.x * (p0.y - p2.y) + p2.x * (p1.y - p0.y) > 0;
     }
@@ -284,6 +282,7 @@ public class SpriteCutter : MonoBehaviour
 
         SetSides(p1, p2, objectToCutDirection);
         
+
         var _leftSideObject = Instantiate(slicePrefab, objectToCut.transform.position, objectToCut.transform.rotation, parent);
         var _rightSideObject = Instantiate(slicePrefab, objectToCut.transform.position, objectToCut.transform.rotation, parent);
 
