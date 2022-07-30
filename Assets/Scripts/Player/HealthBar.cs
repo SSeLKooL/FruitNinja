@@ -46,10 +46,15 @@ public class HealthBar : MonoBehaviour
             }
         }
     }
-
+    
     public void RemoveHeart()
     {
         Destroy(hearts[_currentHeartIndex]);
         _currentHeartIndex--;
+        
+        if (_currentHeartIndex == 0)
+        {
+            hearts[_currentHeartIndex].GetComponent<HeardAnimation>().IncreaseHeardBeat();
+        }
     }
 }

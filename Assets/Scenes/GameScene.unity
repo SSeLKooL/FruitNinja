@@ -2863,7 +2863,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -39, y: -39}
+  m_AnchoredPosition: {x: -57, y: -57}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1463470389
@@ -2878,8 +2878,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77123c405ca562149a1ecc9d66f758bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceBetweenHeartsX: 1
-  distanceBetweenHeartsY: 1
+  distanceBetweenHeartsX: 1.3
+  distanceBetweenHeartsY: 1.3
   heartPerLineCount: 10
   maxHealth: 20
   heartPrefab: {fileID: 8044288020249880015, guid: 347969c24d3e3b2449bae4a4f9b94ec6, type: 3}

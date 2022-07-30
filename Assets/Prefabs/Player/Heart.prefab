@@ -100,6 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2779657908600171663}
+  - component: {fileID: -7418005785855917945}
   m_Layer: 0
   m_Name: Heart
   m_TagString: Untagged
@@ -123,6 +124,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7418005785855917945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044288020249880015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59feb25e73c56a3428409cf92eedbe16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standardMaxIncreaseScaleX: 1.3
+  dangerMaxIncreaseScaleX: 1.6
+  standardWaitTime: 2
+  dangerWaitTime: 0.2
+  standardScaleQuotient: {x: 2, y: 2, z: 0}
+  dangerScaleQuotient: {x: 6, y: 6, z: 0}
 --- !u!1 &9155230804117183951
 GameObject:
   m_ObjectHideFlags: 0
