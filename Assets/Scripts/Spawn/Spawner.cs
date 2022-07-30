@@ -51,9 +51,8 @@ public class Spawner : MonoBehaviour
     {
         playerConfiguration.AddScorePoints(scoreForExecution);
         var blob = Instantiate(blobPrefab, fruit.transform.position, Quaternion.identity, blobParentTransform);
-        Debug.Log(spriteIndex);
         blob.GetComponent<SpriteRenderer>().sprite = blobs[spriteIndex];
-        Debug.Log("ok");
+        
         var cutEffect = Instantiate(cutEffectPrefab, fruit.transform.position, Quaternion.identity, cutEffectParentTransform);
         cutEffect.GetComponent<CutEffect>().SetParticles(spriteIndex);
         spriteCutter.CutObject(fruit, fruitParentTransform, currentSprite, spriteIndex, firstTapPosition,secondTapPosition, fruit.GetComponent<ObjectPhysics>().direction, playerConfiguration);

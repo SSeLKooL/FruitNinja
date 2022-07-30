@@ -4,10 +4,8 @@ using Random = UnityEngine.Random;
 
 public class Fruit : MonoBehaviour
 {
-    private float spriteSize;
-
     [SerializeField] private float sliceRange;
-    
+
     [SerializeField] private Sprite[] fruits;
     
     public Camera currentCamera;
@@ -17,8 +15,12 @@ public class Fruit : MonoBehaviour
     private GameObject _fruit;
     
     private int _spriteIndex;
+    
+    private float spriteRangeX;
+    private float spriteRangeY;
 
-    private float _range;
+    private float _rangeX;
+    private float _rangeY;
 
     private bool _startedSlice;
 
@@ -32,15 +34,17 @@ public class Fruit : MonoBehaviour
         _fruit = this.gameObject;
         _spriteIndex = Random.Range(0, fruits.Length);
         _fruit.GetComponent<SpriteRenderer>().sprite = fruits[_spriteIndex];
-        spriteSize = (fruits[_spriteIndex].rect.height + fruits[_spriteIndex].rect.width) / (4 * PixelsPerUnit);
+        spriteRangeY = (fruits[_spriteIndex].rect.height) / (2 * PixelsPerUnit);
+        spriteRangeX = (fruits[_spriteIndex].rect.width) / (2 * PixelsPerUnit);
     }
 
     private bool CheckCollider(Vector2 currentPosition)
     {
-        _range = _fruit.transform.localScale.x * spriteSize;
+        _rangeX = _fruit.transform.localScale.x * spriteRangeX;
+        _rangeY = _fruit.transform.localScale.y * spriteRangeY;
 
-        return Math.Pow(_fruit.transform.position.x - currentPosition.x, 2) +
-            Math.Pow(_fruit.transform.position.y - currentPosition.y, 2) <= Math.Pow(_range, 2);
+        return Math.Pow(_fruit.transform.position.x - currentPosition.x, 2) / (_rangeX * _rangeX) +
+            Math.Pow(_fruit.transform.position.y - currentPosition.y, 2) / (_rangeY * _rangeY) <= 1;
     }
 
     private void CheckTouch()

@@ -95,6 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c7a6fb76d2ad9544881a616f00dbf6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 6
-  alphaDecreaseQuotient: 0.8
+  lifeTime: 0
+  alphaDecreaseQuotient: 0.5
   maxRotationAngle: 180

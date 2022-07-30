@@ -12,7 +12,10 @@ public class SpriteCutter : MonoBehaviour
     private Vector2[] _currentVertices;
     private ushort[] _currentTriangles;
     private Vector2[] _currentUV;
+    
+    [SerializeField] private float maxAngle;
 
+    private const float DegreePerRadian = (float) Math.PI / 180;
     private const int TriangleVertexCount = 3;
 
     private float _UVkX, _UVkY, _UVbX, _UVbY;
@@ -30,6 +33,8 @@ public class SpriteCutter : MonoBehaviour
 
     private MeshRenderer _leftSideMeshRenderer;
     private MeshRenderer _rightSideMeshRenderer;
+
+    [SerializeField] private LineRenderer testLineRenderer;
 
     private void DivideVertices(Vector2 p1, Vector2 p2, bool[] isAtLeftSide, List<Vector3> leftSideVertices, List<Vector3> rightSideVertices, int[] newIndexes)
     {
@@ -247,6 +252,21 @@ public class SpriteCutter : MonoBehaviour
         _currentVertices = currentSprite.vertices;
         _currentTriangles = currentSprite.triangles;
         _currentUV = currentSprite.uv;
+
+        var v1 = p2 - p1;
+        var v2 = new Vector2(objectToCut.transform.position.x - p1.x, objectToCut.transform.position.y - p1.y);
+
+        var angle = Vector2.Angle(v2, v1);
+
+        if (angle > 90)
+        {
+            angle = 180 - angle;
+        }
+
+        if (angle > maxAngle)
+        {
+            p2 = p1 + (Vector2) Vector3.RotateTowards(v2, v1, maxAngle * DegreePerRadian, 1);
+        }
 
         p1 = objectToCut.transform.InverseTransformPoint(p1);
         p2 = objectToCut.transform.InverseTransformPoint(p2);
