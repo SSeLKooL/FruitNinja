@@ -664,7 +664,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 0b6bf35641360e8439ddfda0e5b123de, type: 2}
   - {fileID: 2100000, guid: cbd9522452527d740903184ee7e20841, type: 2}
   slicePrefab: {fileID: 5619458695560722770, guid: bcace090b05ffc0428a992421fe7fac0, type: 3}
-  Force: 5
+  Force: 4
 --- !u!4 &194492541
 Transform:
   m_ObjectHideFlags: 0
@@ -958,22 +958,22 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 1, g: 0.9739583, b: 0.9742161, a: 1}
+      key2: {r: 1, g: 0, b: 0.009897232, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
+      ctime0: 28527
       ctime1: 65535
-      ctime2: 0
+      ctime2: 65535
       ctime3: 0
       ctime4: 0
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 0
+      atime0: 29876
       atime1: 65535
       atime2: 0
       atime3: 0
@@ -990,7 +990,7 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.05
   m_Autodestruct: 0
   m_Emitting: 1
 --- !u!1 &348658052
