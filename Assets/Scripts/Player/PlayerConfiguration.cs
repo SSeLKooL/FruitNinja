@@ -59,7 +59,7 @@ public class PlayerConfiguration : MonoBehaviour
         touchTrail.emitting = false;
         StopFreeze();
         
-        if (_newScore > _bestScore)
+        if (_newScore >= _bestScore)
         {
             PlayerPrefs.SetInt("RecordScore", _newScore);
             PlayerPrefs.Save();
