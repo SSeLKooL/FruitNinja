@@ -1,10 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class BonusHeart : Fruit
+public class BonusIceCube : Fruit
 {
-    private const int BonusIndex = 8;
+    private const int BonusIndex = 9;
     [SerializeField] private string textForCutting;
-    [SerializeField] private float textScaleMultiplier;
 
     protected override void SetSprite()
     {
@@ -13,8 +14,8 @@ public class BonusHeart : Fruit
 
     protected override void CutBehavior()
     {
-        playerConfiguration.HealPlayer();
-        spawner.SpawnText(RangeX, RangeY, gameObject.transform.position, textScaleMultiplier,textForCutting);
+        playerConfiguration.FreezeTime();
+        spawner.SpawnText(RangeX, RangeY, gameObject.transform.position, textForCutting);
         spawner.ExecuteFruit(gameObject, CurrentSprite, BonusIndex, FirstTapPosition, SecondTapPosition);
     }
 }

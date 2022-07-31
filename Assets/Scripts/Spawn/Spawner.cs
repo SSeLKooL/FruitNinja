@@ -1,7 +1,5 @@
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
@@ -28,6 +26,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private SpriteCutter spriteCutter;
     [SerializeField] private PlayerConfiguration playerConfiguration;
     [SerializeField] private Camera currentCamera;
+    [SerializeField] private PlayerTouch playerTouch;
     
     [SerializeField] private Sprite[] blobs;
 
@@ -105,6 +104,7 @@ public class Spawner : MonoBehaviour
         _physicsScript.playerConfiguration = _fruitScript.playerConfiguration = playerConfiguration;
         _fruitScript.currentCamera = currentCamera;
         _fruitScript.spawner = _thisSpawner;
+        _fruitScript.playerTouch = playerTouch;
     }
     
 }

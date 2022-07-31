@@ -7,6 +7,7 @@ public class BonusBomb : Fruit
     [SerializeField] private GameObject boomPrefab;
     [SerializeField] private BonusBomb bonusBomb;
     [SerializeField] private ObjectPhysics objectPhysics;
+    [SerializeField] private string textFotCutting;
 
     protected override void SetSprite()
     {
@@ -16,7 +17,8 @@ public class BonusBomb : Fruit
     protected override void CutBehavior()
     {
         playerConfiguration.HitPlayer();
-        spawner.SpawnEffect(boomPrefab, gameObject.transform.position).GetComponent<BoomAnimation>().bomb = gameObject;
+        spawner.SpawnText(RangeX, RangeY, transform.position, textFotCutting);
+        spawner.SpawnEffect(boomPrefab, transform.position).GetComponent<BoomAnimation>().bomb = gameObject;
         objectPhysics.enabled = false;
         bonusBomb.enabled = false;
     }

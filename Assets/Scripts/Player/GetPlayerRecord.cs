@@ -7,11 +7,11 @@ public class GetPlayerRecord : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("RecordScore"))
         {
-            this.gameObject.GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetInt("RecordScore").ToString();
+            gameObject.GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetInt("RecordScore").ToString();
         }
         else
         {
-            this.gameObject.GetComponent<TextMeshProUGUI>().text = "0";
+            gameObject.GetComponent<TextMeshProUGUI>().text = "0";
         }
     }
 }

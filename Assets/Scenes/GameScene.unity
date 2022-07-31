@@ -662,6 +662,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: dee860981e85600489893f5232ee8bfe, type: 2}
   - {fileID: 2100000, guid: ff9b18ee9986cb04b943e0df9cdf5d1b, type: 2}
   - {fileID: 2100000, guid: 0b6bf35641360e8439ddfda0e5b123de, type: 2}
+  - {fileID: 2100000, guid: cbd9522452527d740903184ee7e20841, type: 2}
   slicePrefab: {fileID: 5619458695560722770, guid: bcace090b05ffc0428a992421fe7fac0, type: 3}
   Force: 5
 --- !u!4 &194492541
@@ -1096,6 +1097,81 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &417233060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417233061}
+  - component: {fileID: 417233063}
+  - component: {fileID: 417233062}
+  m_Layer: 5
+  m_Name: FreezeScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &417233061
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417233060}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1172192937}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_SizeDelta: {x: 0, y: -0.000061035}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &417233062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417233060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.87715816, b: 1, a: 0.19215687}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &417233063
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417233060}
+  m_CullTransparentMesh: 1
 --- !u!224 &502210873 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2737642016686358664, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
@@ -1605,6 +1681,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5155764562566414867, guid: 8dd62e7375c1fdb48bd9c35c929c160f, type: 3}
     - target: {fileID: 2737642016686358667, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
+      propertyPath: playerTouch
+      value: 
+      objectReference: {fileID: 1050244989}
+    - target: {fileID: 2737642016686358667, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
       propertyPath: spriteCutter
       value: 
       objectReference: {fileID: 194492540}
@@ -1832,6 +1912,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2333015940855386101, guid: 8dd62e7375c1fdb48bd9c35c929c160f, type: 3}
     - target: {fileID: 2737642016686358667, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
+      propertyPath: playerTouch
+      value: 
+      objectReference: {fileID: 1050244989}
+    - target: {fileID: 2737642016686358667, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
       propertyPath: spriteCutter
       value: 
       objectReference: {fileID: 194492540}
@@ -1931,6 +2015,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420031}
   trailRenderer: {fileID: 298508242}
+  tapPosition: {x: 0, y: 0, z: 0}
+  isTouched: 0
 --- !u!1 &1160907096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,6 +2245,7 @@ RectTransform:
   - {fileID: 1767311837}
   - {fileID: 1463470388}
   - {fileID: 1189302902}
+  - {fileID: 417233061}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2267,6 +2354,7 @@ MonoBehaviour:
   fruitPrefab: {fileID: 2333015940855386101, guid: 8dd62e7375c1fdb48bd9c35c929c160f, type: 3}
   bonusHeardPrefab: {fileID: 7890755430006918420, guid: 166f62fd8653c6d41a582ea16dd6691b, type: 3}
   bonusBombPrefab: {fileID: 1438182720127511441, guid: 92579044645278843af40995df9e32f8, type: 3}
+  bonusIceCubePrefab: {fileID: 2283665231130135180, guid: 8ab7eb82794f02d43bf642bfa9f97e36, type: 3}
   spawners:
   - {fileID: 502210874}
   - {fileID: 935251840}
@@ -2275,8 +2363,9 @@ MonoBehaviour:
   throwObjectDelayTime: 1.5
   throwPackDelayTime: 3
   timeDecreaseQuotient: 0.85
-  heartSpawnChance: 0.1
+  heartSpawnChance: 0.05
   bombSpawnChance: 0.1
+  iceCubeSpawnChance: 0.05
 --- !u!1 &1291011478
 GameObject:
   m_ObjectHideFlags: 0
@@ -2329,6 +2418,9 @@ MonoBehaviour:
   startHealth: 3
   scoreAddQuotient: 3
   minScoreSpeed: 20
+  freezeTime: 5
+  freezeQuotient: 0.5
+  freezeScreen: {fileID: 417233060}
   healthBar: {fileID: 1463470389}
   bestScoreObject: {fileID: 560199324}
   scoreObject: {fileID: 263899787}
@@ -2337,6 +2429,7 @@ MonoBehaviour:
   touchTrail: {fileID: 298508242}
   spawnController: {fileID: 1290373015}
   gameOverScreen: {fileID: 29807077}
+  stop: 0
 --- !u!1 &1335106118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,6 +3484,10 @@ PrefabInstance:
       propertyPath: fruitPrefab
       value: 
       objectReference: {fileID: 2333015940855386101, guid: 8dd62e7375c1fdb48bd9c35c929c160f, type: 3}
+    - target: {fileID: 2737642016686358667, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
+      propertyPath: playerTouch
+      value: 
+      objectReference: {fileID: 1050244989}
     - target: {fileID: 2737642016686358667, guid: a66c81e9cba50a94095ae3856fe36780, type: 3}
       propertyPath: spriteCutter
       value: 

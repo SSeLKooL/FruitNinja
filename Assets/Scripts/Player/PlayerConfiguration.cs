@@ -1,6 +1,5 @@
 using System;
 using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerConfiguration : MonoBehaviour
@@ -8,6 +7,14 @@ public class PlayerConfiguration : MonoBehaviour
     [SerializeField] private int startHealth;
     [SerializeField] private float scoreAddQuotient;
     [SerializeField] private float minScoreSpeed;
+
+    [SerializeField] private float freezeTime;
+    [SerializeField] private float freezeQuotient;
+
+    [SerializeField] private GameObject freezeScreen;
+
+    private float _currentFreezeTime;
+    private bool _isFreeze;
 
     private float _currentScoreSpeed;
     private int _newHealth;
@@ -33,20 +40,24 @@ public class PlayerConfiguration : MonoBehaviour
 
     private const string Best = "лучший: ";
 
-    private bool _stop;
+    public bool stop;
 
     private float _bestScore;
 
-    public bool CheckGameStatus()
+    public void FreezeTime()
     {
-        return _stop;
+        Time.timeScale = 1 - freezeQuotient;
+        freezeScreen.SetActive(true);
+        _currentFreezeTime = 0;
+        _isFreeze = true;
     }
 
     private void GameOver()
     {
-        _stop = true;
+        stop = true;
         spawnController.Stop();
         touchTrail.emitting = false;
+        StopFreeze();
         
         if (_newScore > _bestScore)
         {
@@ -58,7 +69,7 @@ public class PlayerConfiguration : MonoBehaviour
         else
         {
             resultScoreText.text = _newScore.ToString();
-            resultBestScoreText.text = Best + _bestScore;
+            resultBestScoreText.text = Best + Mathf.RoundToInt(_bestScore);
         }
 
         gameOverScreen.ShowGameOverScreen();
@@ -86,7 +97,7 @@ public class PlayerConfiguration : MonoBehaviour
 
     public void AddScorePoints(int points)
     {
-        if (!_stop)
+        if (!stop)
         {
             _newScore += points;
         }
@@ -94,7 +105,7 @@ public class PlayerConfiguration : MonoBehaviour
 
     public void HitPlayer()
     {
-        if (!_stop)
+        if (!stop)
         {
             _newHealth--;
 
@@ -109,7 +120,7 @@ public class PlayerConfiguration : MonoBehaviour
 
     public void HealPlayer()
     {
-        if (!_stop)
+        if (!stop)
         {
             _newHealth++;
 
@@ -119,13 +130,17 @@ public class PlayerConfiguration : MonoBehaviour
 
     private void UpdateScore()
     {
-        _currentScoreSpeed = Math.Max((_newScore - _currentScore) * scoreAddQuotient, minScoreSpeed);
-
         if (_currentScore < _newScore)
         {
+            _currentScoreSpeed = Math.Max((_newScore - _currentScore) * scoreAddQuotient, minScoreSpeed);
             _currentScore += _currentScoreSpeed * Time.deltaTime;
+
+            if (_currentScore > _newScore)
+            {
+                _currentScore = _newScore;
+            }
         }
-        
+
         if (_newScore > _bestScore)
         {
             _bestScore = _currentScore;
@@ -136,8 +151,29 @@ public class PlayerConfiguration : MonoBehaviour
         
     }
 
+    private void StopFreeze()
+    {
+        _isFreeze = false;
+        freezeScreen.SetActive(false);
+        Time.timeScale = 1;
+    }
+    
+    private void CheckFreezeTime()
+    {
+        if (_isFreeze)
+        {
+            _currentFreezeTime += Time.deltaTime / freezeQuotient;
+
+            if (_currentFreezeTime > freezeTime)
+            {
+                StopFreeze();
+            }
+        }
+    }
+
     private void Update()
     {
         UpdateScore();
+        CheckFreezeTime();
     }
 }

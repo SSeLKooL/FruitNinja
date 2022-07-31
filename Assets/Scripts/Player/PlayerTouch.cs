@@ -1,5 +1,3 @@
-using TMPro.EditorUtilities;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerTouch : MonoBehaviour
@@ -9,7 +7,8 @@ public class PlayerTouch : MonoBehaviour
 
     private Transform _playerTouchTransform;
 
-    private Vector3 _tapPosition = new Vector3(0, 0, 0);
+    public Vector3 tapPosition = new Vector3(0, 0, 0);
+    public bool isTouched;
 
     private void Start()
     {
@@ -18,8 +17,13 @@ public class PlayerTouch : MonoBehaviour
 
     private void MoveTrail()
     {
-        _playerTouchTransform.position = _tapPosition;
-        trailRenderer.enabled = true;
+        _playerTouchTransform.position = tapPosition;
+        
+        if (!isTouched)
+        {
+            trailRenderer.enabled = true;
+            isTouched = true;
+        }
     }
 
     private void Update()
@@ -30,18 +34,22 @@ public class PlayerTouch : MonoBehaviour
 
             if (touch.phase == TouchPhase.Moved)
             {
-                _tapPosition = (Vector2) mainCamera.ScreenToWorldPoint(touch.position);
+                tapPosition = (Vector2) mainCamera.ScreenToWorldPoint(touch.position);
                 MoveTrail();
             }
         }
         else if (Input.GetMouseButton(0))
         {
-            _tapPosition = (Vector2) mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            tapPosition = (Vector2) mainCamera.ScreenToWorldPoint(Input.mousePosition);
             MoveTrail();
         }
         else 
         {
-            trailRenderer.enabled = false;
+            if (isTouched)
+            {
+                trailRenderer.enabled = false;
+                isTouched = false;
+            }
         }
     }
 }
