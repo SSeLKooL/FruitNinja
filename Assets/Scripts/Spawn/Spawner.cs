@@ -55,18 +55,7 @@ public class Spawner : MonoBehaviour
         
         spawnedText.GetComponent<TextMeshProUGUI>().text = text;
     }
-    
-    public void SpawnText(float rangeX, float rangeY, Vector2 center, float scaleMultiplier, string text)
-    {
-        var textPosition = new Vector2(Random.Range(center.x - rangeX, center.x + rangeX), Random.Range(center.y - rangeY, center.y + rangeY));
-        
-        var spawnedText = Instantiate(addedScorePrefab, textPosition, Quaternion.identity, addedScoreParentTransform);
-        
-        spawnedText.transform.localScale *= scaleMultiplier;
-        
-        spawnedText.GetComponent<TextMeshProUGUI>().text = text;
-    }
-    
+
     public void ExecuteFruit(GameObject fruit, Sprite currentSprite, int materialIndex, Vector2 firstTapPosition, Vector2 secondTapPosition)
     {
         spriteCutter.CutObject(fruit, fruitParentTransform, currentSprite, materialIndex, firstTapPosition,secondTapPosition, fruit.GetComponent<ObjectPhysics>().direction, playerConfiguration);

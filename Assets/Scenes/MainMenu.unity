@@ -686,7 +686,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -157.4, y: 0}
+  m_AnchoredPosition: {x: -157.39996, y: 0}
   m_SizeDelta: {x: 314.79132, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1057919332
@@ -776,7 +776,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.0200195, y: -95.791}
+  m_AnchoredPosition: {x: 2.0200195, y: -95.791016}
   m_SizeDelta: {x: 166.6604, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1127266258
@@ -1118,7 +1118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5930607217026551846, guid: 1aa47bc3245130e43a54c8ede69daa5f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5930607217026551847, guid: 1aa47bc3245130e43a54c8ede69daa5f, type: 3}
       propertyPath: m_Pivot.x
@@ -1231,7 +1231,7 @@ RectTransform:
   m_GameObject: {fileID: 1306016235}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 0.953923}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0.953923}
   m_Children:
   - {fileID: 1575284338}
   - {fileID: 126121477}
@@ -1343,8 +1343,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.050003, y: 24.434998}
-  m_SizeDelta: {x: 214.28, y: -51.13}
+  m_AnchoredPosition: {x: 0.0000076293945, y: 25.565}
+  m_SizeDelta: {x: 259.75, y: -51.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1575284339
 MonoBehaviour:
@@ -1429,7 +1429,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 1.128624, w: 0}
+  m_margin: {x: 0.000030495266, y: 0, z: 1.128624, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1511,6 +1511,14 @@ PrefabInstance:
     - target: {fileID: 1481184612035844431, guid: 91f185f7eefd5744383f35576d5eda04, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1481184612035844431, guid: 91f185f7eefd5744383f35576d5eda04, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1481184612035844431, guid: 91f185f7eefd5744383f35576d5eda04, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 3979529426140470978, guid: 91f185f7eefd5744383f35576d5eda04, type: 3}
       propertyPath: m_Name
@@ -1622,11 +1630,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7479975841462909554, guid: 91f185f7eefd5744383f35576d5eda04, type: 3}
       propertyPath: m_fontSize
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 7479975841462909554, guid: 91f185f7eefd5744383f35576d5eda04, type: 3}
       propertyPath: m_fontSizeBase
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3979529426140470983, guid: 91f185f7eefd5744383f35576d5eda04, type: 3}
@@ -1673,6 +1681,14 @@ PrefabInstance:
     - target: {fileID: 4677237134306335160, guid: 262e7264890b2184cb71f5a459790c1e, type: 3}
       propertyPath: m_text
       value: "\u0412\u044B\u0439\u0442\u0438"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677237134306335160, guid: 262e7264890b2184cb71f5a459790c1e, type: 3}
+      propertyPath: m_fontSize
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677237134306335160, guid: 262e7264890b2184cb71f5a459790c1e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 6150110818550219212, guid: 262e7264890b2184cb71f5a459790c1e, type: 3}
       propertyPath: m_Pivot.x
@@ -1797,6 +1813,14 @@ PrefabInstance:
     - target: {fileID: 8306850445933544274, guid: 262e7264890b2184cb71f5a459790c1e, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306850445933544274, guid: 262e7264890b2184cb71f5a459790c1e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306850445933544274, guid: 262e7264890b2184cb71f5a459790c1e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6150110818550219215, guid: 262e7264890b2184cb71f5a459790c1e, type: 3}

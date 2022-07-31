@@ -12,6 +12,7 @@ public class PlayerTouch : MonoBehaviour
 
     private void Start()
     {
+        trailRenderer.enabled = false;
         _playerTouchTransform = this.gameObject.transform;
     }
 

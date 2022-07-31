@@ -4,7 +4,6 @@ public class BonusHeart : Fruit
 {
     private const int BonusIndex = 8;
     [SerializeField] private string textForCutting;
-    [SerializeField] private float textScaleMultiplier;
 
     protected override void SetSprite()
     {
@@ -14,7 +13,7 @@ public class BonusHeart : Fruit
     protected override void CutBehavior()
     {
         playerConfiguration.HealPlayer();
-        spawner.SpawnText(RangeX, RangeY, gameObject.transform.position, textScaleMultiplier,textForCutting);
+        spawner.SpawnText(RangeX, RangeY, gameObject.transform.position,textForCutting);
         spawner.ExecuteFruit(gameObject, CurrentSprite, BonusIndex, FirstTapPosition, SecondTapPosition);
     }
 }

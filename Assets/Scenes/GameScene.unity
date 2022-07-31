@@ -2979,7 +2979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1481184612035844431, guid: 91f185f7eefd5744383f35576d5eda04, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -50.897995
+      value: -48.421196
       objectReference: {fileID: 0}
     - target: {fileID: 3979529426140470978, guid: 91f185f7eefd5744383f35576d5eda04, type: 3}
       propertyPath: m_Name
@@ -3019,7 +3019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3979529426140470979, guid: 91f185f7eefd5744383f35576d5eda04, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 203.9799
+      value: 194.05382
       objectReference: {fileID: 0}
     - target: {fileID: 3979529426140470979, guid: 91f185f7eefd5744383f35576d5eda04, type: 3}
       propertyPath: m_SizeDelta.y
